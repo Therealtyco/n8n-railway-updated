@@ -10,3 +10,4 @@ RUN find /opt/puppeteer-cache -name "chrome" -type f | head -1 | xargs -I{} ln -
 
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/local/bin/chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
