@@ -2,9 +2,13 @@ FROM n8nio/n8n:latest
 
 USER root
 
-RUN /sbin/apk add --no-cache chromium nss freetype harfbuzz ca-certificates ttf-freefont
+ENV PUPPETEER_CACHE_DIR=/opt/puppeteer-cache
 
+RUN npx --yes puppeteer browsers install chrome
+
+RUN find /opt/puppeteer-cache -name "chrome" -type f | head -1 | xargs -I{} ln -sf {} /usr/local/bin/chromium
+
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/local/bin/chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 USER node
