@@ -2,12 +2,9 @@ FROM n8nio/n8n:latest
 
 USER root
 
-RUN apt-get update && apt-get install -y \
-    chromium \
-    --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+RUN /sbin/apk add --no-cache chromium nss freetype harfbuzz ca-certificates ttf-freefont
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 USER node
